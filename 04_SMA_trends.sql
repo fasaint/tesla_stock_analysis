@@ -12,10 +12,10 @@ WITH moving_averages AS (
         AVG(close) OVER (ORDER BY date ROWS BETWEEN 199 PRECEDING AND CURRENT ROW) AS sma_200
     FROM ts_data_staging
 )
--- Count days closing above 50-day SMA
+-- count day closing above 50 SMA
 SELECT
     COUNT(*) AS days_above_50_sma,
-    ROUND(100.0 * COUNT(*) / COUNT(*) OVER (), 2) AS pct_time_above_50_sma
+    ROUND(100.0 * COUNT(*) / (SELECT COUNT(*) FROM moving_averages WHERE sma_50 IS NOT NULL), 2) AS pct_time_above_50_sma
 FROM moving_averages
 WHERE close > sma_50 AND sma_50 IS NOT NULL;
 

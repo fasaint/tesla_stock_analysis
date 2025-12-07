@@ -169,7 +169,7 @@ WITH moving_averages AS (
 -- Count days closing above 50-day SMA
 SELECT
     COUNT(*) AS days_above_50_sma,
-    ROUND(100.0 * COUNT(*) / COUNT(*) OVER (), 2) AS pct_time_above_50_sma
+    ROUND(100.0 * COUNT(*) / (SELECT COUNT(*) FROM moving_averages WHERE sma_50 IS NOT NULL), 2) AS pct_time_above_50_sma
 FROM moving_averages
 WHERE close > sma_50 AND sma_50 IS NOT NULL;
 
@@ -193,11 +193,21 @@ LIMIT 1;
 ```
 **Breakdown / Insights:**
 
-- **Days Above 50-day SMA:**
-Tesla closed above its 50-day SMA on 2,230 days, indicating frequent short-term bullish momentum. (Note: The percentage in your JSON shows 223000%, which seems like a calculation issue; typically it should be around the actual proportion of days in the dataset.)
+- **Days Above 50-day SMA: 2,230**
+
+- **Percentage of time above 50-day SMA: 57.53%**
+
+Tesla closed above its 50-day SMA 57.53% of the time, showing consistent short-term bullish momentum.
 
 - **Last Close Below 200-day SMA:**
-The most recent day Tesla closed below its 200-day SMA was September 2, 2025, with a close of $329.36 compared to a 200-day SMA of $329.94. This shows that the stock is mostly in a long-term bullish trend, with only occasional dips below the 200-day average.
+
+- - *Date:* September 2, 2025
+
+- - *Close:* $329.36
+
+- - *200-day SMA:* $329.94
+
+This indicates that Tesla has mostly stayed above its 200-day SMA, suggesting a strong long-term bullish trend, with only occasional dips below this long-term average.
 
 ### 5. Strategy Signal Generation (Golden / Death Cross)
 
