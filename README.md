@@ -167,6 +167,7 @@ Here's the breakdown of Tesla’s worst daily returns:
 
 These large negative returns indicate extreme market reactions, possibly due to earnings misses, global events, or company-specific shocks.
 
+![Top 5 Best-Worst Trading Days](/Assets/02_top5_good_worst_days.png)
 
 
 Overall, analyzing the best and worst trading days by percentage return helps identify periods of high risk and volatility, which is essential for traders, risk managers, and long-term investors evaluating Tesla’s stock behavior.
